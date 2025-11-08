@@ -1,0 +1,7 @@
+server/node_modules/*
+client/node_modules/*
+.env
+.DS_Store
+.vscode/
+npm-debug.log
+yarn-error.log
