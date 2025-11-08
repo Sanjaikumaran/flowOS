@@ -78,9 +78,9 @@ export default function Home({ onLogout }) {
     setShowModal(true);
   }
 
-  async function saveTask() {
-    if (!title.trim()) return;
-    const taskData = { title, desc, priority, deadline, subtasks };
+  async function saveTask(taskData) {
+    console.log("Saving task:", taskData);
+
     if (editingTask) await updateTask(editingTask._id, taskData);
     else await createTask(taskData);
     setShowModal(false);
@@ -189,9 +189,9 @@ export default function Home({ onLogout }) {
                       >
                         Delete
                       </button>
-                      <button onClick={() => openModal(t)}>
+                      {/*<button onClick={() => openModal(t)}>
                         + Add Subtask
-                      </button>
+                      </button>*/}
                       <button
                         onClick={() => {
                           setEditingTask(t);

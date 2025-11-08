@@ -21,12 +21,12 @@ export default function TaskModal({ show, onClose, onSave, task }) {
   if (!show) return null;
 
   const handleAddSubtask = () => {
-    setSubtasks([...subtasks, { title: "", done: false }]);
+    setSubtasks([...subtasks, title]);
   };
 
   const handleSubtaskChange = (index, value) => {
     const newSubs = [...subtasks];
-    newSubs[index].title = value;
+    newSubs[index] = value;
     setSubtasks(newSubs);
   };
 

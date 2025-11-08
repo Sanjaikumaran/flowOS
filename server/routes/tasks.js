@@ -35,7 +35,7 @@ router.post("/", auth, async (req, res) => {
     due: due ? new Date(due) : null,
     avatar: avatar || "Producer",
     xpValue: xpValue || 10,
-    subtasks: (subtasks || []).map((s) => ({ title: s, done: false })),
+    subtasks: subtasks || [],
   });
   await task.save();
   res.json(task);
