@@ -9,10 +9,21 @@ const aiRouter = require("./routes/ai");
 require("dotenv").config();
 
 const app = express();
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: (origin, callback) => {
+      if (
+        !origin || // allow mobile apps / curl / Postman
+        origin.includes("localhost") ||
+        origin.endsWith(".vercel.app")
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
@@ -20,6 +31,7 @@ app.use(
 app.use(express.json());
 
 const MONGO = process.env.MONGO || "mongodb://127.0.0.1:27017/flowos";
+
 mongoose
   .connect(MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Mongo connected"))
